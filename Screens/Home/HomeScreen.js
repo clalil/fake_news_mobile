@@ -1,7 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { Component } from "react"
+import { StyleSheet, Text, View } from "react-native"
+import { GetArticles } from "../../Services/ArticlesApiService"
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends Component {
+    state = {
+      articles: []
+    }
+
   render() {
     return (
       <View style={styles.container}>
@@ -11,6 +16,8 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+export default HomeScreen
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,4 +25,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   }
-});
+})
