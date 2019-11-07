@@ -5,28 +5,28 @@ import { Dimensions } from "react-native";
 
 const HomeScreen = () => {
 
-  // const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([])
 
-  // useEffect(() => {
-  //   let articles = GetArticles()
-  //   updateArticlesStateHandler(articles)
-  // })
+  useEffect(() => {
+    let articles = GetArticles()
+    updateArticlesStateHandler(articles)
+  })
 
-  // const updateArticlesStateHandler = articles => {
-  //   setArticles(articles)
-  // }
+  const updateArticlesStateHandler = articles => {
+    setArticles(articles)
+  }
 
-  // const displayArticle = () => {
-  //   articles.map((article) => {
-  //     return <FlatList key={article.id}>        
-          // <Image
-          // style={styles.image}
-          // source={images.placeholder} />
-          // <Text>{article.title}</Text>
-          // <Text>{article.content}</Text>
-          // </FlatList>
-  //   })
-  // }
+  const displayArticle = () => {
+    articles.map((article) => {
+      return <FlatList key={article.id}>        
+          <Image
+          style={styles.image}
+          source={images.placeholder} />
+          <Text>{article.title}</Text>
+          <Text>{article.content}</Text>
+          </FlatList>
+    })
+  }
 
   return (
     <View style={styles.container}>
@@ -35,7 +35,7 @@ const HomeScreen = () => {
         <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <View style={styles.articleContainer}>
         <Text style={styles.articleHeader}>Available Articles</Text>
-        {/* <Text>{articles ? displayArticle : "Loading"}</Text> */}
+        <Text>{articles ? displayArticle : "Loading"}</Text>
       </View>
       </View>
     </View>
