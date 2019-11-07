@@ -18,13 +18,14 @@ const HomeScreen = () => {
 
   const displayArticle = () => {
     articles.map((article) => {
-      return <FlatList key={article.id}>        
-          <Image
-          style={styles.image}
-          source={images.placeholder} />
-          <Text>{article.title}</Text>
-          <Text>{article.content}</Text>
-          </FlatList>
+      return <FlatList key={article.id}>
+        <Image
+          style={{ width: 100, height: 100 }}
+          source={{ uri: article.image }}
+        />
+        <Text>{article.title}</Text>
+        <Text>{article.content}</Text>
+      </FlatList>
     })
   }
 
@@ -34,9 +35,9 @@ const HomeScreen = () => {
         <Text style={styles.heroHeader}>Fake News</Text>
         <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <View style={styles.articleContainer}>
-        <Text style={styles.articleHeader}>Available Articles</Text>
-        <Text>{articles ? displayArticle : "Loading"}</Text>
-      </View>
+          <Text style={styles.articleHeader}>Available Articles</Text>
+          <Text>{articles ? displayArticle : "Loading"}</Text>
+        </View>
       </View>
     </View>
   )
