@@ -6,29 +6,68 @@ import { Image } from "react-native-elements"
 
 const HomeScreen = () => {
 
-  const [articles, setArticles] = useState([])
+  // const [articles, setArticles] = useState([])
 
-  useEffect(() => {
-    let articles = GetArticles()
-    UpdateArticlesStateHandler(articles)
-  })
+  // useEffect(() => {
+  //   let articles = GetArticles()
+  //   UpdateArticlesStateHandler(articles)
+  // })
 
-  const UpdateArticlesStateHandler = articles => {
-    setArticles(articles)
-  }
+  // const UpdateArticlesStateHandler = articles => {
+  //   setArticles(articles)
+  // }
 
-  const DisplayArticles = ({ article }) => {
+  const articles = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+      content: 'Hello',
+      image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
+      category: 'Politics'
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+      content: 'Hello2',
+      image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
+      category: 'Leisure'
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+      content: 'Hello3',
+      image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
+      category: 'Tech'
+    },
+  ]
+
+  const DisplayArticles = ({ title, image, content, category }) => {
     return (
-      <View key={article.id} style={styles.oneArticleContainer}>
+      <View style={styles.oneArticleContainer}>
         <Image
           style={{ width: 100, height: 100, borderRadius: 10, overflow: 'hidden' }}
-          source={{ uri: article.image }}
+          source={{ uri: image }}
         />
-        <Text style={styles.title}>{article.title}</Text>
-        <Text style={styles.content}>{article.content}</Text>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.content}>{content}</Text>
+        <Text style={styles.category}>Category: {category}</Text>
       </View>
     )
   }
+
+  const flatList = (
+    <FlatList
+      data={articles}
+      renderItem={({ item }) =>
+        <DisplayArticles
+          image={item.image}
+          title={item.title}
+          content={item.content}
+          category={item.category}
+        />}
+      keyExtractor={item => item.id}
+    />
+  )
 
   return (
     <View style={styles.container}>
@@ -37,12 +76,7 @@ const HomeScreen = () => {
         <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <View style={styles.articleContainer}>
           <Text style={styles.articleHeader}>Available Articles</Text>
-          {/* <View>{articles ? displayArticles : "Loading"}</View> */}
-          <FlatList
-            data={articles}
-            renderItem={({ item }) => <DisplayArticles article={item.article} />}
-            keyExtractor={item => item.id}
-          />
+          <View>{(1 + 1 == 2) ? flatList : <Text style={styles.loading}>There are no articles here</Text>}</View>
         </View>
       </View>
     </View>
@@ -86,12 +120,17 @@ const styles = StyleSheet.create({
   },
   articleHeader: {
     fontSize: 20,
+    color: '#42382f',
     textAlign: 'center',
     fontFamily: 'Palatino-Bold',
     marginTop: 15,
-    backgroundColor: '#fcf7f3',
+    backgroundColor: '#f0e9e3',
     padding: 5,
     width: width,
+    shadowColor: '#fff7f0',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,
   },
   articleContainer: {
     width: width,
@@ -118,5 +157,22 @@ const styles = StyleSheet.create({
     padding: 7,
     fontSize: 15,
     fontFamily: 'Palatino',
+  },
+  category: {
+    textAlign: 'left',
+    fontSize: 15,
+    fontFamily: 'Palatino-Bold',
+    backgroundColor: '#faf6f2',
+    overflow: 'hidden',
+    borderRadius: 5,
+    padding: 5,
+    width: 140,
+  },
+  loading: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontFamily: 'Palatino-Italic',
+    marginTop: 10,
+    padding: 5,
   }
 })
