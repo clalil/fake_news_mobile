@@ -10,16 +10,16 @@ const HomeScreen = () => {
 
   useEffect(() => {
     let articles = GetArticles()
-    updateArticlesStateHandler(articles)
+    UpdateArticlesStateHandler(articles)
   })
 
-  const updateArticlesStateHandler = articles => {
+  const UpdateArticlesStateHandler = articles => {
     setArticles(articles)
   }
 
-  const displayArticles = () => {
-    articles.map((article) => {
-      return <View key={article.id} style={styles.oneArticleContainer}>
+  const DisplayArticles = ({ article }) => {
+    return (
+      <View key={article.id} style={styles.oneArticleContainer}>
         <Image
           style={{ width: 100, height: 100, borderRadius: 10, overflow: 'hidden' }}
           source={{ uri: article.image }}
@@ -27,7 +27,7 @@ const HomeScreen = () => {
         <Text style={styles.title}>{article.title}</Text>
         <Text style={styles.content}>{article.content}</Text>
       </View>
-    })
+    )
   }
 
   return (
@@ -37,7 +37,12 @@ const HomeScreen = () => {
         <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <View style={styles.articleContainer}>
           <Text style={styles.articleHeader}>Available Articles</Text>
-          <View>{articles ? displayArticles : "Loading"}</View>
+          {/* <View>{articles ? displayArticles : "Loading"}</View> */}
+          <FlatList
+            data={articles}
+            renderItem={({ item }) => <DisplayArticles article={item.article} />}
+            keyExtractor={item => item.id}
+          />
         </View>
       </View>
     </View>
