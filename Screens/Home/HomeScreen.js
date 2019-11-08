@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, FlatList } from "react-native"
 import { GetArticles } from '../../Services/ArticlesApiService'
-import { Dimensions } from "react-native";
+import { Dimensions } from "react-native"
+import { Image } from "react-native-elements"
 
 const HomeScreen = () => {
 
@@ -18,7 +19,7 @@ const HomeScreen = () => {
 
   const displayArticles = () => {
     articles.map((article) => {
-      return <View key={article.id}>
+      return <View key={article.id} style={styles.oneArticleContainer}>
         <Image
           style={{ width: 100, height: 100, borderRadius: 10, overflow: 'hidden' }}
           source={{ uri: article.image }}
@@ -36,7 +37,7 @@ const HomeScreen = () => {
         <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <View style={styles.articleContainer}>
           <Text style={styles.articleHeader}>Available Articles</Text>
-          <FlatList>{articles ? displayArticles : "Loading"}</FlatList>
+          <View>{articles ? displayArticles : "Loading"}</View>
         </View>
       </View>
     </View>
@@ -87,6 +88,15 @@ const styles = StyleSheet.create({
     padding: 5,
     width: width,
   },
+  articleContainer: {
+    width: width,
+  },
+  oneArticleContainer: {
+    borderBottomColor: '#f2f0ee',
+    borderBottomWidth: 1,
+    padding: 5,
+    marginTop: 5,
+  },
   image: {
     marginTop: 10
   },
@@ -94,11 +104,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     fontFamily: 'Palatino-Bold',
+    marginTop: 5,
+    padding: 5,
   },
-  content:{
+  content: {
     textAlign: 'left',
     margin: 1,
-    padding: 10,
+    padding: 7,
     fontSize: 15,
     fontFamily: 'Palatino',
   }
