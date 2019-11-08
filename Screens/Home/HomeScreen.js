@@ -6,46 +6,46 @@ import { Image } from "react-native-elements"
 
 const HomeScreen = () => {
 
-  const [articles, setArticles] = useState([])
-
-  useEffect(() => {
-    let articles = GetArticles()
-    UpdateArticlesStateHandler(articles)
-  })
+  // const [articles, setArticles] = useState([])
 
   // useEffect(() => {
-  //   GetArticles().then(res => {
-  //     UpdateArticlesStateHandler(res)
-  //   })
-  // }, [])
+  //   let articles = GetArticles()
+  //   UpdateArticlesStateHandler(articles)
+  // })
 
-  const UpdateArticlesStateHandler = articles => {
-    setArticles(articles)
-  }
+  // // useEffect(() => {
+  // //   GetArticles().then(res => {
+  // //     UpdateArticlesStateHandler(res)
+  // //   })
+  // // }, [])
 
-  // const articles = [
-  //   {
-  //     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-  //     title: 'First Item',
-  //     content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  //     image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
-  //     category: 'Politics'
-  //   },
-  //   {
-  //     id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-  //     title: 'Second Item',
-  //     content: 'Hello2',
-  //     image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
-  //     category: 'Leisure'
-  //   },
-  //   {
-  //     id: '58694a0f-3da1-471f-bd96-145571e29d72',
-  //     title: 'Third Item',
-  //     content: 'Hello3',
-  //     image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
-  //     category: 'Tech'
-  //   },
-  // ]
+  // const UpdateArticlesStateHandler = articles => {
+  //   setArticles(articles)
+  // }
+
+  const articles = [
+    {
+      id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
+      title: 'First Item',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
+      category: 'Politics'
+    },
+    {
+      id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
+      title: 'Second Item',
+      content: 'Hello2',
+      image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
+      category: 'Leisure'
+    },
+    {
+      id: '58694a0f-3da1-471f-bd96-145571e29d72',
+      title: 'Third Item',
+      content: 'Hello3',
+      image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
+      category: 'Tech'
+    },
+  ]
 
   const DisplayArticles = ({ title, image, content, category }) => {
     return (
