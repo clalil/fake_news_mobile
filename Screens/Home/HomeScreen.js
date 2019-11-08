@@ -16,16 +16,16 @@ const HomeScreen = () => {
     setArticles(articles)
   }
 
-  const displayArticle = () => {
+  const displayArticles = () => {
     articles.map((article) => {
-      return <FlatList key={article.id}>
+      return <View key={article.id}>
         <Image
-          style={{ width: 100, height: 100 }}
+          style={{ width: 100, height: 100, borderRadius: 10, overflow: 'hidden' }}
           source={{ uri: article.image }}
         />
-        <Text>{article.title}</Text>
-        <Text>{article.content}</Text>
-      </FlatList>
+        <Text style={styles.title}>{article.title}</Text>
+        <Text style={styles.content}>{article.content}</Text>
+      </View>
     })
   }
 
@@ -36,7 +36,7 @@ const HomeScreen = () => {
         <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <View style={styles.articleContainer}>
           <Text style={styles.articleHeader}>Available Articles</Text>
-          <Text>{articles ? displayArticle : "Loading"}</Text>
+          <FlatList>{articles ? displayArticles : "Loading"}</FlatList>
         </View>
       </View>
     </View>
@@ -45,8 +45,7 @@ const HomeScreen = () => {
 
 export default HomeScreen
 
-var width = Dimensions.get('window').width;
-var height = Dimensions.get('window').height;
+var width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {
@@ -89,6 +88,18 @@ const styles = StyleSheet.create({
     width: width,
   },
   image: {
-    marginTop: 50
+    marginTop: 10
   },
+  title: {
+    textAlign: 'left',
+    fontSize: 20,
+    fontFamily: 'Palatino-Bold',
+  },
+  content:{
+    textAlign: 'left',
+    margin: 1,
+    padding: 10,
+    fontSize: 15,
+    fontFamily: 'Palatino',
+  }
 })
