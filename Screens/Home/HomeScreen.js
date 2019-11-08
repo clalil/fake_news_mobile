@@ -21,7 +21,7 @@ const HomeScreen = () => {
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
       title: 'First Item',
-      content: 'Hello',
+      content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       image: 'https://facebook.github.io/react-native/img/tiny_logo.png',
       category: 'Politics'
     },
@@ -44,13 +44,17 @@ const HomeScreen = () => {
   const DisplayArticles = ({ title, image, content, category }) => {
     return (
       <View style={styles.oneArticleContainer}>
+        <View>
         <Image
           style={{ width: 100, height: 100, borderRadius: 10, overflow: 'hidden' }}
           source={{ uri: image }}
         />
+        </View>
+        <View style={{ paddingLeft: 5 }}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.content}>{content}</Text>
         <Text style={styles.category}>Category: {category}</Text>
+        </View>
       </View>
     )
   }
@@ -140,6 +144,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 5,
     marginTop: 5,
+    flexDirection: 'row',
   },
   image: {
     marginTop: 10
@@ -157,6 +162,7 @@ const styles = StyleSheet.create({
     padding: 7,
     fontSize: 15,
     fontFamily: 'Palatino',
+    maxWidth: 290,
   },
   category: {
     textAlign: 'left',
