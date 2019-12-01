@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 30,
     fontSize: 40,
-    fontFamily: 'Cochin',
+    fontFamily: 'Palatino',
     fontWeight: 'bold'
   },
   miniHeader: {
@@ -97,15 +97,15 @@ const styles = StyleSheet.create({
   },
   title: {
     padding: 10,
-    fontSize: 30,
-    fontFamily: 'Cochin',
+    fontSize: 25,
+    fontFamily: 'Palatino-Bold',
     fontWeight: 'bold'
   },
   content: {
     margin: 1,
     padding: 10,
-    fontSize: 25,
-    fontFamily: 'Cochin',
+    fontSize: 20,
+    fontFamily: 'Palatino',
     color: '#363737'
   },
   category: {
