@@ -43,8 +43,11 @@ export default class HomeScreen extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={styles.headerContainer}>
+          <Text style={styles.header}>Fake News</Text>
+        </View>
+        <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <FlatList
-          inverted
           data={this.state.articles}
           renderItem={this.renderArticles}
           keyExtractor={item => item.id.toString()}
@@ -57,17 +60,34 @@ export default class HomeScreen extends Component {
 var width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
-  articles: {
-    margin: 25,
-    flexDirection: 'column',
-    borderWidth: 0.5,
-    borderColor: '#505050'
+  headerContainer: {
+    marginTop: 30,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   container: {
     flex: 1,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  header: {
+    marginTop: 30,
+    fontSize: 40,
+    fontFamily: 'Cochin',
+    fontWeight: 'bold'
+  },
+  miniHeader: {
+    fontFamily: 'Palatino-Italic',
+    textAlign: 'center',
+    fontSize: 20,
+    marginTop: 10,
+  },
+  articles: {
+    margin: 25,
+    flexDirection: 'column',
+    borderWidth: 0.5,
+    borderColor: '#505050'
   },
   image: {
     alignSelf: 'center',
