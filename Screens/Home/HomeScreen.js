@@ -7,7 +7,9 @@ import LoginForm from './LoginForm'
 export default class HomeScreen extends Component {
   state = {
     articles: [],
-    renderLoginForm: false
+    renderLoginForm: false,
+    email: '',
+    password: '',
   }
 
   async componentDidMount() {
@@ -38,6 +40,17 @@ export default class HomeScreen extends Component {
         </Text>
       </View>
     )
+  }
+
+  emailStateHandler = text => {
+    this.setState({
+      email: text
+    })
+  }
+  passwordStateHandler = text => {
+    this.setState({
+      password: text
+    })
   }
 
   renderLoginForm = () => {
