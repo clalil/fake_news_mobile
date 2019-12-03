@@ -11,7 +11,7 @@ const LoginForm = (props) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
-        Login to access full articles
+        Login to view our fake news
         </Text>
       <View style={styles.inputContainer}>
         <TextInput
@@ -19,6 +19,7 @@ const LoginForm = (props) => {
           type='text'
           underlineColorAndroid='transparent'
           placeholder='Email'
+          placeholderTextColor='#1a222e'
           autoCapitalize='none'
           onChangeText={props.handleEmail}
         />
@@ -29,6 +30,7 @@ const LoginForm = (props) => {
           secureTextEntry={true}
           underlineColorAndroid='transparent'
           placeholder='Password'
+          placeholderTextColor='#1a222e'
           autoCapitalize='none'
           onChangeText={props.handlePassword}
         />
@@ -52,14 +54,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#f7f5f3',
   },
   header: {
-    
+    fontFamily: 'Palatino-Italic',
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 10,
   },
   inputContainer: {
-    borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
+    borderBottomColor: '#f5fcff',
+    backgroundColor: '#ffffff',
     borderRadius: 30,
     borderBottomWidth: 1,
     width: 250,
@@ -69,7 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   inputs: {
-    borderBottomColor: '#FFFFFF',
+    borderBottomColor: '#ffffff',
     flex: 1,
     textAlign: 'center',
   },
@@ -84,14 +89,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
     width: 250,
     borderRadius: 30,
   },
   loginButton: {
-    backgroundColor: "#00b5ec",
+    backgroundColor: "#7299cf",
   },
   loginText: {
-    color: 'white',
+    color: '#000000',
   }
 });
