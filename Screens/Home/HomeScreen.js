@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { GetArticles } from '../../Services/ArticlesApiService';
+import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
 import { Dimensions } from "react-native"
+import LoginForm from './LoginForm'
 
 export default class HomeScreen extends Component {
   state = {
@@ -42,6 +43,8 @@ export default class HomeScreen extends Component {
   render() {
 
     return (
+      <>
+      <LoginForm />
       <View style={styles.container}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Fake News</Text>
@@ -53,6 +56,7 @@ export default class HomeScreen extends Component {
           keyExtractor={item => item.id.toString()}
         />
       </View>
+      </>
     )
   }
 }
