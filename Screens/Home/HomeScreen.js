@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native'
 import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
 import { Dimensions } from "react-native"
@@ -7,7 +7,8 @@ import LoginForm from './LoginForm'
 
 export default class HomeScreen extends Component {
   state = {
-    articles: []
+    articles: [],
+    renderLoginForm: false
   }
 
   async componentDidMount() {
@@ -40,22 +41,52 @@ export default class HomeScreen extends Component {
     )
   }
 
+  renderLoginForm = () => {
+    if (this.state.renderLoginForm) {
+      return (
+        <View>
+          <LoginForm
+            onLogin={this.onLogin}
+            handleLogin={this.handleLogin}
+            handleEmail={this.emailStateHandler}
+            handlePassword={this.passwordStateHandler}
+          />
+        </View>
+      )
+    } else {
+      return (
+        <>
+          <TouchableHighlight
+            style={[styles.buttonContainer, styles.loginButton]}
+            title='Login'
+            onPress={this.renderLoginForm}
+          >
+            <Text style={styles.loginText}>
+              Login
+            </Text>
+          </TouchableHighlight>
+        </>
+      )
+    }
+  }
+
   render() {
+    let renderLoginForm = this.renderLoginForm()
 
     return (
       <>
-      <LoginForm />
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.header}>Fake News</Text>
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.header}>Fake News</Text>
+          </View>
+          <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
+          {renderLoginForm}
+          <FlatList
+            data={this.state.articles}
+            renderItem={this.renderArticles}
+            keyExtractor={item => item.id.toString()}
+          />
         </View>
-        <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
-        <FlatList
-          data={this.state.articles}
-          renderItem={this.renderArticles}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
       </>
     )
   }
@@ -122,4 +153,19 @@ const styles = StyleSheet.create({
     width: 100,
     textAlign: 'center',
   },
+  buttonContainer: {
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    borderRadius: 30,
+  },
+  loginButton: {
+    backgroundColor: "#1a222e",
+    marginTop: 15,
+  },
+  loginText: {
+    color: '#ffffff',
+  }
 });
