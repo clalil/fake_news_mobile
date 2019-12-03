@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#f7f5f3',
     width: width,
+    paddingBottom: 50,
   },
   header: {
     fontFamily: 'Palatino-Italic',

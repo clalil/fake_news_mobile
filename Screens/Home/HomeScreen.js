@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-nati
 import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
 import LoginForm from './LoginForm'
+import { authenticate } from '../../Services/AuthService'
 
 export default class HomeScreen extends Component {
   state = {
@@ -10,6 +11,8 @@ export default class HomeScreen extends Component {
     renderLoginForm: false,
     email: '',
     password: '',
+    user: '',
+    authenticated: false
   }
 
   async componentDidMount() {
@@ -49,9 +52,10 @@ export default class HomeScreen extends Component {
         authenticated: true,
         user: response.user
       })
-      return <View>You've successfully signed in.</View>
     } else {
-      return <View>Wrong password or email.</View>
+      this.setState({
+        authenticated: false
+      })
     }
   }
 
@@ -78,31 +82,39 @@ export default class HomeScreen extends Component {
   }
 
   renderLogin = () => {
-    if (this.state.renderLoginForm) {
+    if (this.state.authenticated) {
       return (
         <View>
-          <LoginForm
-            onLogin={this.onLogin}
-            handleLogin={this.handleLogin}
-            handleEmail={this.emailStateHandler}
-            handlePassword={this.passwordStateHandler}
-          />
+          <Text style={styles.greeting}>Hi {this.state.user}</Text>
         </View>
       )
     } else {
-      return (
-        <>
-          <TouchableHighlight
-            style={[styles.buttonContainer, styles.loginButton]}
-            title='Login'
-            onPress={this.renderLoginForm}
-          >
-            <Text style={styles.loginText}>
-              Login
+      if (this.state.renderLoginForm) {
+        return (
+          <View>
+            <LoginForm
+              onLogin={this.onLogin}
+              handleLogin={this.handleLogin}
+              handleEmail={this.emailStateHandler}
+              handlePassword={this.passwordStateHandler}
+            />
+          </View>
+        )
+      } else {
+        return (
+          <>
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.loginButton]}
+              title='Login'
+              onPress={this.renderLoginForm}
+            >
+              <Text style={styles.loginText}>
+                Login
             </Text>
-          </TouchableHighlight>
-        </>
-      )
+            </TouchableHighlight>
+          </>
+        )
+      }
     }
   }
 
@@ -112,11 +124,11 @@ export default class HomeScreen extends Component {
     return (
       <>
         <View style={styles.container}>
-        {renderLoginForm}
           <View style={styles.headerContainer}>
             <Text style={styles.header}>Fake News</Text>
           </View>
           <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
+          {renderLoginForm}
           <FlatList
             data={this.state.articles}
             renderItem={this.renderArticles}
@@ -130,7 +142,7 @@ export default class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    marginTop: 30,
+    marginTop: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -193,12 +205,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 150,
     borderRadius: 30,
-    marginTop: 60,
+    marginTop: 15,
   },
   loginButton: {
     backgroundColor: "#1a222e",
   },
   loginText: {
     color: '#ffffff',
+  },
+  greeting: {
+    marginTop: 10,
+    fontSize: 15,
+    fontFamily: 'Palatino-Bold',
   }
 });
