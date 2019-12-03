@@ -1,8 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native'
 import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
-import { Dimensions } from "react-native"
 import LoginForm from './LoginForm'
 
 export default class HomeScreen extends Component {
@@ -42,6 +41,12 @@ export default class HomeScreen extends Component {
   }
 
   renderLoginForm = () => {
+    this.setState({
+      renderLoginForm: true
+    })
+  }
+
+  renderLogin = () => {
     if (this.state.renderLoginForm) {
       return (
         <View>
@@ -71,16 +76,16 @@ export default class HomeScreen extends Component {
   }
 
   render() {
-    let renderLoginForm = this.renderLoginForm()
+    let renderLoginForm = this.renderLogin()
 
     return (
       <>
         <View style={styles.container}>
+        {renderLoginForm}
           <View style={styles.headerContainer}>
             <Text style={styles.header}>Fake News</Text>
           </View>
           <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
-          {renderLoginForm}
           <FlatList
             data={this.state.articles}
             renderItem={this.renderArticles}
@@ -91,8 +96,6 @@ export default class HomeScreen extends Component {
     )
   }
 }
-
-var width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   header: {
-    marginTop: 30,
+    marginTop: 5,
     fontSize: 40,
     fontFamily: 'Palatino',
     fontWeight: 'bold'
@@ -150,7 +153,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#faf6f2',
     overflow: 'hidden',
     padding: 5,
-    width: 100,
     textAlign: 'center',
   },
   buttonContainer: {
@@ -160,10 +162,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 150,
     borderRadius: 30,
+    marginTop: 60,
   },
   loginButton: {
     backgroundColor: "#1a222e",
-    marginTop: 15,
   },
   loginText: {
     color: '#ffffff',

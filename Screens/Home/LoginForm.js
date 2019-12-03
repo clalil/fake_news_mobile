@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Text
 } from 'react-native'
+import { Dimensions } from "react-native"
 
 const LoginForm = (props) => {
   return (
@@ -49,12 +50,15 @@ const LoginForm = (props) => {
 
 export default LoginForm
 
+let width = Dimensions.get('window').width
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#f7f5f3',
+    width: width,
   },
   header: {
     fontFamily: 'Palatino-Italic',
