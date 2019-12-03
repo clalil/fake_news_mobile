@@ -42,6 +42,19 @@ export default class HomeScreen extends Component {
     )
   }
 
+  onLogin = async () => {
+    let response = await authenticate(this.state.email, this.state.password)
+    if (response.authenticated) {
+      this.setState({
+        authenticated: true,
+        user: response.user
+      })
+      return <View>You've successfully signed in.</View>
+    } else {
+      return <View>Wrong password or email.</View>
+    }
+  }
+
   emailStateHandler = text => {
     this.setState({
       email: text
@@ -51,6 +64,11 @@ export default class HomeScreen extends Component {
     this.setState({
       password: text
     })
+  }
+
+  handleLogin = () => {
+    const { email, password } = this.state
+    onLogin({ email, password })
   }
 
   renderLoginForm = () => {
