@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {
   Text,
+  Image,
   View,
   StyleSheet,
   FlatList
@@ -8,7 +9,7 @@ import {
 
 export default class ArticleScreen extends Component {
 
-  renderSelectedArticles = ({ item }) => {
+  renderSelectedArticle = ({ item }) => {
     let article = item
     return (
       <View style={styles.container}>
@@ -32,7 +33,7 @@ export default class ArticleScreen extends Component {
         </View>
         <FlatList
           data={chosenArticle}
-          renderItem={this.renderSelectedArticles}
+          renderItem={this.renderSelectedArticle}
           keyExtractor={item => item.id.toString()}
         />
       </View>

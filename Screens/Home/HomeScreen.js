@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button } from 'react-native'
 import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
 import LoginForm from './LoginForm'
@@ -41,8 +41,18 @@ export default class HomeScreen extends Component {
         <Text style={styles.content}>
           {ingress}
         </Text>
+        <Button
+          title='View Article'
+          onPress={() => this.showArticle(article)}
+        />
       </View>
     )
+  }
+
+  showArticle(article) {
+    this.props.navigation.navigate('Article', {
+      selectedArticle: [article]
+    })
   }
 
   onLogin = async () => {
