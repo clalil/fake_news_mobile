@@ -1,7 +1,7 @@
-import React from "react"
+import React, { Component } from 'react'
 import { View } from "react-native"
 
-export default class ArticleScreen extends React.Component {
+export default class ArticleScreen extends Component {
   render() {
     return (
       <View>
