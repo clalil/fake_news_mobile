@@ -1,12 +1,18 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { GetArticles } from '../../Services/ArticlesApiService';
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native'
+import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
-import { Dimensions } from "react-native"
+import LoginForm from './LoginForm'
+import { authenticate } from '../../Services/AuthService'
 
 export default class HomeScreen extends Component {
   state = {
-    articles: []
+    articles: [],
+    renderLoginForm: false,
+    email: '',
+    password: '',
+    user: '',
+    authenticated: false
   }
 
   async componentDidMount() {
@@ -39,29 +45,104 @@ export default class HomeScreen extends Component {
     )
   }
 
+  onLogin = async () => {
+    let response = await authenticate(this.state.email, this.state.password)
+    if (response.authenticated) {
+      this.setState({
+        authenticated: true,
+        user: response.user
+      })
+    } else {
+      this.setState({
+        authenticated: false
+      })
+    }
+  }
+
+  emailStateHandler = text => {
+    this.setState({
+      email: text
+    })
+  }
+  passwordStateHandler = text => {
+    this.setState({
+      password: text
+    })
+  }
+
+  handleLogin = () => {
+    const { email, password } = this.state
+    onLogin({ email, password })
+  }
+
+  renderLoginForm = () => {
+    this.setState({
+      renderLoginForm: true
+    })
+  }
+
+  renderLogin = () => {
+    if (this.state.authenticated) {
+      return (
+        <View>
+          <Text style={styles.greeting}>Hi {this.state.user}</Text>
+        </View>
+      )
+    } else {
+      if (this.state.renderLoginForm) {
+        return (
+          <View>
+            <LoginForm
+              onLogin={this.onLogin}
+              handleLogin={this.handleLogin}
+              handleEmail={this.emailStateHandler}
+              handlePassword={this.passwordStateHandler}
+            />
+          </View>
+        )
+      } else {
+        return (
+          <>
+            <TouchableHighlight
+              style={[styles.buttonContainer, styles.loginButton]}
+              title='Login'
+              onPress={this.renderLoginForm}
+            >
+              <Text style={styles.loginText}>
+                Login
+            </Text>
+            </TouchableHighlight>
+          </>
+        )
+      }
+    }
+  }
+
   render() {
+    let renderLoginForm = this.renderLogin()
 
     return (
-      <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <Text style={styles.header}>Fake News</Text>
+      <>
+        <View style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Text style={styles.header}>Fake News</Text>
+          </View>
+          <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
+          {renderLoginForm}
+          <FlatList
+            data={this.state.articles}
+            renderItem={this.renderArticles}
+            keyExtractor={item => item.id.toString()}
+          />
         </View>
-        <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
-        <FlatList
-          data={this.state.articles}
-          renderItem={this.renderArticles}
-          keyExtractor={item => item.id.toString()}
-        />
-      </View>
+      </>
     )
   }
 }
 
-var width = Dimensions.get('window').width
-
 const styles = StyleSheet.create({
   headerContainer: {
-    marginTop: 30,
+    marginTop: 40,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -72,7 +153,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   header: {
-    marginTop: 30,
+    marginTop: 5,
     fontSize: 40,
     fontFamily: 'Palatino',
     fontWeight: 'bold'
@@ -115,7 +196,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#faf6f2',
     overflow: 'hidden',
     padding: 5,
-    width: 100,
     textAlign: 'center',
   },
+  buttonContainer: {
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    borderRadius: 30,
+    marginTop: 15,
+  },
+  loginButton: {
+    backgroundColor: "#1a222e",
+  },
+  loginText: {
+    color: '#ffffff',
+  },
+  greeting: {
+    marginTop: 10,
+    fontSize: 15,
+    fontFamily: 'Palatino-Bold',
+  }
 });
