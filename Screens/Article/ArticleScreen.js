@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { Image } from 'react-native-elements'
+import { Dimensions } from "react-native"
 import {
   Text,
-  Image,
   View,
   StyleSheet,
   FlatList
@@ -31,6 +32,7 @@ export default class ArticleScreen extends Component {
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Fake News</Text>
         </View>
+        <Text style={styles.miniHeader}>The Fake News Media is working hard</Text>
         <FlatList
           data={chosenArticle}
           renderItem={this.renderSelectedArticle}
@@ -40,6 +42,8 @@ export default class ArticleScreen extends Component {
     )
   }
 }
+
+let width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -59,9 +63,15 @@ const styles = StyleSheet.create({
     fontFamily: 'Palatino',
     fontWeight: 'bold'
   },
-  image: {
+  miniHeader: {
+    fontFamily: 'Palatino-Italic',
+    textAlign: 'center',
+    fontSize: 20,
+    margin: 10,
+  },
+  image:{
     alignSelf: 'center',
-    resizeMode: 'stretch',
+    width: 350,
     height: 200,
     marginLeft: 20
   },
@@ -79,12 +89,13 @@ const styles = StyleSheet.create({
     color: '#363737'
   },
   category: {
-    textAlign: 'left',
-    fontSize: 15,
+    fontSize: 20,
     fontFamily: 'Palatino-Bold',
     backgroundColor: '#faf6f2',
     overflow: 'hidden',
     padding: 5,
     textAlign: 'center',
+    width: width,
+    marginTop: 10,
   }
 });

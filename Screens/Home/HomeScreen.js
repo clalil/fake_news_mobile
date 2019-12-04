@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
     color: '#363737'
   },
   category: {
-    textAlign: 'left',
     fontSize: 15,
     fontFamily: 'Palatino-Bold',
     backgroundColor: '#faf6f2',
