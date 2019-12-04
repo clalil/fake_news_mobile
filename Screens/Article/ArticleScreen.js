@@ -47,7 +47,7 @@ let width = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   headerContainer: {
-    marginTop: 40,
+    marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
