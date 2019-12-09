@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Image } from 'react-native-elements'
-import { Dimensions } from "react-native"
+import { Dimensions } from 'react-native'
 import {
   Text,
   View,
