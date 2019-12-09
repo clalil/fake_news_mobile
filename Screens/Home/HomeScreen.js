@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, FlatList, TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, FlatList, TouchableHighlight, Button } from 'react-native'
 import { GetArticles } from '../../Services/ArticlesApiService'
 import { Image } from 'react-native-elements'
 import LoginForm from './LoginForm'
@@ -41,8 +41,20 @@ export default class HomeScreen extends Component {
         <Text style={styles.content}>
           {ingress}
         </Text>
+        {this.state.authenticated ? (
+        <Button
+          title='View Article'
+          onPress={() => this.showArticle(article)}
+        />
+    ) : <Text style={styles.btn}>''</Text>}
       </View>
     )
+  }
+
+  showArticle(article) {
+    this.props.navigation.navigate('Article', {
+      selectedArticle: [article]
+    })
   }
 
   onLogin = async () => {
@@ -109,7 +121,7 @@ export default class HomeScreen extends Component {
               onPress={this.renderLoginForm}
             >
               <Text style={styles.loginText}>
-                Login
+              Login to access full articles
             </Text>
             </TouchableHighlight>
           </>
@@ -190,7 +202,6 @@ const styles = StyleSheet.create({
     color: '#363737'
   },
   category: {
-    textAlign: 'left',
     fontSize: 15,
     fontFamily: 'Palatino-Bold',
     backgroundColor: '#faf6f2',
@@ -199,16 +210,16 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonContainer: {
-    height: 45,
+    height: 40,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 150,
-    borderRadius: 30,
+    width: 200,
+    borderRadius: 10,
     marginTop: 15,
   },
   loginButton: {
-    backgroundColor: "#1a222e",
+    backgroundColor: "#73748c",
   },
   loginText: {
     color: '#ffffff',
@@ -217,5 +228,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 15,
     fontFamily: 'Palatino-Bold',
+  },
+  btn: {
+    color: 'transparent',
   }
 });

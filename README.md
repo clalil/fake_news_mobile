@@ -16,9 +16,10 @@ The application was an individual challenge and part of for our three week newsr
 ---
 ## Screenshots
 <img src="./assets/listed_articles.png" alt="Image of app" width="40%">
+<img src="./assets/single_article.png" alt="Image of app" width="40%">
 <img src="./assets/loginform.png" alt="Image of app" width="40%">
-
 ---
+
 ## Special Thanks
 To the coaches and staff at [Craft Academy](https://craftacademy.se/)!
 
